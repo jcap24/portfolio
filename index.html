@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio</title>
+    <title>Josh Capistrano | Data Engineer Portfolio</title>
+    <meta name="description" content="Josh Capistrano - Data Engineer & Software Engineer. Experienced in AWS, Python, Spark, and building scalable data solutions.">
+    <meta property="og:title" content="Josh Capistrano | Data Engineer Portfolio">
+    <meta property="og:description" content="Data Engineer & Software Engineer experienced in AWS, Python, Spark, and building scalable ETL pipelines.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joshcapistrano.com">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23667eea'/><text x='600' y='350' font-family='Arial' font-size='120' font-weight='bold' fill='white' text-anchor='middle'>Josh Capistrano</text><text x='600' y='430' font-family='Arial' font-size='40' fill='rgba(255,255,255,0.8)' text-anchor='middle'>Data Engineer | Software Engineer</text></svg>">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23667eea'/><stop offset='100%25' stop-color='%23764ba2'/></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23g)'/><text x='50' y='68' font-family='Arial' font-size='55' font-weight='bold' fill='white' text-anchor='middle'>JC</text></svg>">
     <style>
         * {
@@ -144,7 +151,9 @@
 
         /* Home Section */
         .home-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2, #5a67d8, #9f7aea, #667eea);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -201,6 +210,12 @@
             background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes moveBackground {
@@ -1501,14 +1516,361 @@
                 height: 45px;
             }
         }
+        /* Page Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+            animation: preloaderPulse 1.2s ease infinite;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px 10px rgba(102, 126, 234, 0.3); }
+        }
+
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 1001;
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        /* Profile Avatar */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+            animation: slideDown 0.8s ease;
+        }
+
+        .home-section.shrunk .profile-avatar {
+            display: none;
+        }
+
+        /* Skill Icons */
+        .skill-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-bar-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+        }
+
+        /* Keyboard Shortcut Hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(15, 15, 30, 0.9);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 10px 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8em;
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .keyboard-hint:hover {
+            border-color: #667eea;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .keyboard-hint kbd {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #667eea;
+        }
+
+        .keyboard-hint.dismissed {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Project Detail Modal */
+        .project-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-modal {
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            background: #1a1a2e;
+            border-radius: 20px;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .project-modal-overlay.active .project-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .project-modal-header {
+            padding: 30px 30px 0;
+        }
+
+        .project-modal-header h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .project-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-modal-close:hover {
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        .project-modal-body {
+            padding: 20px 30px 30px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .project-modal-body h3 {
+            color: #667eea;
+            margin: 20px 0 10px;
+            font-size: 1.1em;
+        }
+
+        .project-modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-modal-body ul li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+        }
+
+        .project-modal-body ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* Skip Navigation (Accessibility) */
+        .skip-nav {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            z-index: 10000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: top 0.3s;
+        }
+
+        .skip-nav:focus {
+            top: 0;
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar, .scroll-top-btn, .theme-toggle, .keyboard-hint,
+            .preloader, .reading-progress, .scroll-cue, .resume-modal-overlay,
+            .project-modal-overlay {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                color: #333 !important;
+            }
+
+            .home-section {
+                background: none !important;
+                color: #333 !important;
+                min-height: auto !important;
+                padding: 20px !important;
+                animation: none !important;
+            }
+
+            .home-section::before {
+                display: none;
+            }
+
+            .profile-avatar {
+                border-color: #667eea !important;
+                background: #667eea !important;
+            }
+
+            .main-container {
+                margin-top: 0 !important;
+            }
+
+            .page-section {
+                display: block !important;
+                page-break-inside: avoid;
+                padding: 20px 0 !important;
+                min-height: auto !important;
+                animation: none !important;
+            }
+
+            .section-title {
+                color: #333 !important;
+            }
+
+            .about-card, .skill-category, .timeline-item,
+            .project-card, .cert-card, .education-card, .contact-form {
+                background: white !important;
+                border: 1px solid #ddd !important;
+                color: #333 !important;
+                box-shadow: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+
+            .about-card p, .responsibility, .timeline-company,
+            .education-card p, .project-content p, .contact-info p,
+            .skill-item, .stat-label {
+                color: #555 !important;
+            }
+
+            .timeline::before {
+                background: #ddd !important;
+            }
+
+            .highlight {
+                background: #eef !important;
+                color: #333 !important;
+            }
+
+            .stat-number {
+                -webkit-text-fill-color: #667eea !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .keyboard-hint {
+                display: none;
+            }
+
+            .profile-avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 2em;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+    <!-- Page Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">JC</div>
+    </div>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress"></div>
+
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">Portfolio</div>
-            <div class="hamburger" onclick="toggleMobileMenu()">
+            <div class="hamburger" onclick="toggleMobileMenu()" role="button" aria-label="Toggle menu" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1547,12 +1909,13 @@
     </nav>
 
     <!-- Main Container -->
-    <div class="main-container">
+    <div class="main-container" id="main-content">
 
         <!-- Home Section -->
         <section id="home" class="page-section home-section active">
             <div class="home-content">
-                <h1>Welcome to My Portfolio</h1>
+                <div class="profile-avatar">JC</div>
+                <h1 id="greeting">Welcome to My Portfolio</h1>
                 <p class="title">Josh Capistrano</p>
                 <p class="title" id="typing-title"><span class="typing-cursor"></span></p>
                 <p class="description">
@@ -1617,7 +1980,10 @@
                             <h3>Core Technologies</h3>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">Python (Pandas, Boto3, PySpark)</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.82-2.46-.01-.69.05-.63.13-.55.21-.47.27-.38.3-.31.33-.25.35-.18.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V.49h.01l-.02.13zM6.6 3.13a.89.89 0 110 1.78.89.89 0 010-1.78z"/><path d="M21.83 8.5v.07l-.01.12-.05.63-.13.55-.21.47-.27.38-.3.31-.33.25-.35.18-.35.14-.33.1-.3.06-.26.04-.21.02H13.7v.83h5.38l.82 2.46.01.69-.05.63-.13.55-.21.47-.27.38-.3.31-.33.25-.35.18-.35.14-.33.1-.3.07-.26.04-.21.02h-.13l-.06-.01H8.16l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06h1.57l.21.03.28.07.32.12.35.18.36.26.36.36.35.46.32.59.28.73.21.88.14 1.05.05 1.23-.06 1.22-.16 1.04-.24.87-.32.71-.36.57-.4.44-.42.33-.42.24-.4.16-.36.1-.32.05-.24.01h-.16l-.06-.01h-8.16v.83h5.65l.82 2.46.01.69-.05.63-.13.55-.21.46-.27.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02h-5.84l-.69.05-.59.14-.5.21-.41.28-.33.32-.27.35-.2.36-.15.36-.1.35-.07.32-.04.28-.02.21v6.07h.01l.02-.13.05-.63.13-.55.21-.46.27-.38.3-.31.33-.25.35-.19.35-.14.33-.1.3-.06.26-.04.21-.02h8.16v-.83h-5.38l-.82-2.46-.01-.69.05-.63.13-.55.21-.46.27-.38.3-.31.33-.25.35-.18.35-.14.33-.1.3-.07.26-.04.21-.02h.13l.06.01h8.16v.83h-5.65l-.82-2.46.02.13z M17.4 18.87a.89.89 0 110 1.78.89.89 0 010-1.78z"/></svg>
+                                        <span class="skill-bar-name">Python (Pandas, Boto3, PySpark)</span>
+                                    </span>
                                     <span class="skill-bar-percentage">95%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1626,7 +1992,10 @@
                             </div>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">AWS (Lambda, S3, EMR, Redshift)</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 01-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 01-.287-.375 6.18 6.18 0 01-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.032-.863.104-.296.072-.583.16-.863.272a2.287 2.287 0 01-.28.104.488.488 0 01-.127.024c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 01.224-.167c.28-.144.616-.264 1.01-.36a4.84 4.84 0 011.244-.152c.95 0 1.644.216 2.091.647.44.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 00-.735-.136 6.02 6.02 0 00-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 01-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 01.32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 01.311-.08h.743c.128 0 .2.064.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 01-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 01-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 01-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 00.415-.758.777.777 0 00-.215-.559c-.144-.151-.416-.287-.807-.414l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 01-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.176 0 .36.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 01.24.2.43.43 0 01.071.263v.375c0 .168-.064.256-.184.256a.83.83 0 01-.303-.096 3.652 3.652 0 00-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.16.152.454.304.87.44l1.133.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167z"/></svg>
+                                        <span class="skill-bar-name">AWS (Lambda, S3, EMR, Redshift)</span>
+                                    </span>
                                     <span class="skill-bar-percentage">90%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1635,7 +2004,10 @@
                             </div>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">Apache Spark</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M12 2L1 21h22L12 2zm0 3.5L19.5 19h-15L12 5.5z"/></svg>
+                                        <span class="skill-bar-name">Apache Spark</span>
+                                    </span>
                                     <span class="skill-bar-percentage">85%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1647,7 +2019,10 @@
                             <h3>Tools & Methodologies</h3>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">SQL & Database Management</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zm6 12c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17zm0-5c0 .5-2.13 2-6 2s-6-1.5-6-2V9.77C7.61 10.55 9.72 11 12 11s4.39-.45 6-1.23V12z"/></svg>
+                                        <span class="skill-bar-name">SQL & Database Management</span>
+                                    </span>
                                     <span class="skill-bar-percentage">85%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1656,7 +2031,10 @@
                             </div>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">Git & Version Control</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.66 2.66a1.838 1.838 0 011.9 3.039 1.837 1.837 0 01-2.6 0 1.846 1.846 0 01-.404-2.019l-2.48-2.48v6.53a1.844 1.844 0 01.486.372 1.838 1.838 0 010 2.6 1.838 1.838 0 01-2.6 0 1.838 1.838 0 010-2.6c.18-.18.387-.316.61-.406V9.305a1.838 1.838 0 01-1-2.413l-2.72-2.722-7.2 7.183a1.55 1.55 0 000 2.188l10.48 10.477a1.55 1.55 0 002.186 0l10.433-10.434a1.55 1.55 0 000-2.187z"/></svg>
+                                        <span class="skill-bar-name">Git & Version Control</span>
+                                    </span>
                                     <span class="skill-bar-percentage">90%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1665,7 +2043,10 @@
                             </div>
                             <div class="skill-bar-item">
                                 <div class="skill-bar-header">
-                                    <span class="skill-bar-name">Agile Development</span>
+                                    <span class="skill-bar-label">
+                                        <svg class="skill-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        <span class="skill-bar-name">Agile Development</span>
+                                    </span>
                                     <span class="skill-bar-percentage">80%</span>
                                 </div>
                                 <div class="skill-bar-bg">
@@ -1766,8 +2147,8 @@
                                 <span class="tech-tag">Redshift</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Details</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" onclick="openProjectModal('pipeline', event)">View Details</a>
+                                <a href="https://github.com/jcap24" class="project-link" target="_blank">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -1799,8 +2180,8 @@
                                 <span class="tech-tag">SNS</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Details</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" onclick="openProjectModal('quality', event)">View Details</a>
+                                <a href="https://github.com/jcap24" class="project-link" target="_blank">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -1830,8 +2211,8 @@
                                 <span class="tech-tag">CloudFormation</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Details</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" onclick="openProjectModal('microservices', event)">View Details</a>
+                                <a href="https://github.com/jcap24" class="project-link" target="_blank">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -1920,7 +2301,7 @@
                         </div>
                     </div>
 
-                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleFormSubmit(event)">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1939,6 +2320,22 @@
             </div>
         </section>
 
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div class="project-modal-overlay" id="projectModal" onclick="closeProjectModal(event)">
+        <div class="project-modal" onclick="event.stopPropagation()">
+            <button class="project-modal-close" onclick="closeProjectModal()">&times;</button>
+            <div class="project-modal-header">
+                <h2 id="projectModalTitle"></h2>
+            </div>
+            <div class="project-modal-body" id="projectModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint" onclick="this.classList.add('dismissed')">
+        <kbd>1</kbd>-<kbd>7</kbd> sections &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> navigate
     </div>
 
     <!-- Resume Preview Modal -->
@@ -1965,10 +2362,10 @@
     </div>
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-top-btn" onclick="scrollToTop()">↑</button>
+    <button class="scroll-top-btn" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
 
     <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode" role="button" aria-label="Toggle dark/light mode" tabindex="0">
         <span class="theme-icon">🌙</span>
     </div>
 
@@ -2148,21 +2545,41 @@
             }
         });
 
-        // Handle contact form submission
+        // Handle contact form submission via Formspree
         function handleFormSubmit(event) {
             event.preventDefault();
-
             const form = event.target;
-            const name = form.name.value;
-            const email = form.email.value;
-            const message = form.message.value;
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
 
-            // Here you would typically send this to a backend
-            // For now, we'll just show an alert
-            alert(`Thank you ${name}! Your message has been received. I'll get back to you at ${email} soon!`);
-
-            // Reset form
-            form.reset();
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    submitBtn.textContent = 'Sent!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                    form.reset();
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            }).catch(error => {
+                submitBtn.textContent = 'Error - Try Again';
+                submitBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                submitBtn.disabled = false;
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                }, 3000);
+            });
         }
 
         // Section order for keyboard navigation
@@ -2306,8 +2723,141 @@
             setTimeout(type, 800);
         }
 
+        // Project detail data
+        const projectDetails = {
+            pipeline: {
+                title: 'Real-Time Data Pipeline',
+                content: `
+                    <h3>Overview</h3>
+                    <p>Built a scalable ETL pipeline that processes over 10 million records daily, enabling real-time analytics and reporting for business stakeholders.</p>
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Ingests data from multiple sources including S3, Kafka, and REST APIs</li>
+                        <li>PySpark jobs on AWS EMR for distributed data transformation</li>
+                        <li>Automated data quality checks with alerting via CloudWatch and SNS</li>
+                        <li>Optimized Redshift schema for fast analytical queries</li>
+                        <li>CI/CD pipeline with automated testing and deployment</li>
+                    </ul>
+                    <h3>Impact</h3>
+                    <ul>
+                        <li>Reduced data processing time from 4 hours to 25 minutes</li>
+                        <li>Achieved 99.9% pipeline uptime with automated recovery</li>
+                        <li>Enabled near real-time dashboards for 50+ business users</li>
+                    </ul>
+                    <h3>Tech Stack</h3>
+                    <p>Python, PySpark, AWS EMR, AWS Lambda, Amazon Redshift, S3, CloudWatch, CloudFormation</p>
+                `
+            },
+            quality: {
+                title: 'Data Quality Framework',
+                content: `
+                    <h3>Overview</h3>
+                    <p>Developed a comprehensive data validation framework that automatically detects anomalies, schema violations, and data drift across all data pipelines.</p>
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Rule-based validation engine with 200+ configurable quality rules</li>
+                        <li>Automated anomaly detection using statistical methods</li>
+                        <li>Real-time alerting and reporting dashboards</li>
+                        <li>Data lineage tracking for root cause analysis</li>
+                        <li>Self-healing mechanisms for common data issues</li>
+                    </ul>
+                    <h3>Impact</h3>
+                    <ul>
+                        <li>Reduced data errors by 85% across all production pipelines</li>
+                        <li>Cut incident response time from hours to minutes</li>
+                        <li>Saved 20+ engineering hours per week on manual data checks</li>
+                    </ul>
+                    <h3>Tech Stack</h3>
+                    <p>Python, Pandas, AWS CloudWatch, SNS, Lambda, Great Expectations</p>
+                `
+            },
+            microservices: {
+                title: 'Microservices Architecture',
+                content: `
+                    <h3>Overview</h3>
+                    <p>Designed and implemented a serverless microservices architecture for data preprocessing, replacing a monolithic batch processing system.</p>
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Event-driven architecture using Lambda and SQS</li>
+                        <li>API Gateway for service orchestration and request routing</li>
+                        <li>Infrastructure as Code with CloudFormation templates</li>
+                        <li>Automated scaling based on data volume</li>
+                        <li>Comprehensive logging and monitoring with X-Ray</li>
+                    </ul>
+                    <h3>Impact</h3>
+                    <ul>
+                        <li>Improved processing speed by 60% over previous system</li>
+                        <li>Reduced infrastructure costs by 40% with serverless</li>
+                        <li>Enabled independent deployment of each service</li>
+                    </ul>
+                    <h3>Tech Stack</h3>
+                    <p>AWS Lambda, API Gateway, S3, SQS, CloudFormation, Python, Node.js</p>
+                `
+            }
+        };
+
+        // Open project detail modal
+        function openProjectModal(projectId, event) {
+            if (event) event.preventDefault();
+            const project = projectDetails[projectId];
+            if (!project) return;
+            document.getElementById('projectModalTitle').textContent = project.title;
+            document.getElementById('projectModalBody').innerHTML = project.content;
+            document.getElementById('projectModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close project detail modal
+        function closeProjectModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Time-based greeting
+        function updateGreeting() {
+            const el = document.getElementById('greeting');
+            if (!el) return;
+            const hour = new Date().getHours();
+            let greeting;
+            if (hour < 12) greeting = 'Good Morning';
+            else if (hour < 17) greeting = 'Good Afternoon';
+            else greeting = 'Good Evening';
+            el.textContent = greeting + '!';
+        }
+
+        // Reading progress bar
+        function initReadingProgress() {
+            const bar = document.getElementById('readingProgress');
+            if (!bar) return;
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (docHeight > 0) {
+                    bar.style.width = (scrollTop / docHeight * 100) + '%';
+                }
+            });
+        }
+
+        // Preloader
+        function dismissPreloader() {
+            const preloader = document.getElementById('preloader');
+            if (!preloader) return;
+            preloader.classList.add('hidden');
+            setTimeout(() => { preloader.style.display = 'none'; }, 600);
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Dismiss preloader after content loads
+            setTimeout(dismissPreloader, 800);
+
+            // Set time-based greeting
+            updateGreeting();
+
+            // Init reading progress bar
+            initReadingProgress();
+
             startTypingAnimation();
 
             // Mark elements for scroll animation
@@ -2320,6 +2870,13 @@
             });
 
             initScrollAnimations();
+
+            // Close project modal on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('projectModal').classList.contains('active')) {
+                    closeProjectModal();
+                }
+            });
         });
     </script>
 </body>
